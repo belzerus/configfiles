@@ -1,3 +1,14 @@
+" For best user experiance below listed plugins should be considered:
+" - cctree.vim
+" - bitbake.vim
+" - syntax_checker
+" - NERD_commenter
+" - NERD_tree
+" - syntastic
+" - ctrlp.vim
+" - checksyntax.vim
+
+
 set nocompatible
 set ruler
 set history=50
@@ -22,34 +33,45 @@ set showtabline=2
 syntax on
 filetype plugin indent on
 filetype plugin on
-color ron
+"color ron
+color darkblue
+" Stealed with pride from emuskon
+highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
+"
+
+
 highlight Comment ctermfg=red
 highlight Cursor ctermbg=Red ctermfg=red
 highlight CursorLine ctermfg=Green ctermbg=Green
 set guioptions=agimt
 set go-=m go-=T
 set noequalalways
+set autochdir
+set tags+=./tags;
 
-let Tlist_Display_Prototype = 1
-let JavaBrowser_Expand_Tree_At_Startup = 1
-imap <C-H> <Left>
-imap <C-L> <Right>
-imap <C-J> <Down>
-imap <C-K> <Up>
-imap <C-P> <Esc>pa
-imap <C-E> \emph{}<Esc>i
+syntax match nonprintable "[^\x20-\x7E]"
+highlight nonprintable guibg=Red ctermbg=2
+
 map <Tab> ==
-map <F5> :! ctags -R *<CR>
-map <F6> :se number!<CR>
-map <F7> :set hlsearch!<CR>
-map <F8> :set colorcolumn=80
-map <C-C> :s/\(\S\)/#\1/<CR>
-map <S-C> :s/#\(.\)/\1/<CR>
-map <C-K> :s/\(.*\)/\/\*\1\*\//<CR>
-map <S-K> :s/^[[:space:]]*\/\*\(.*\)[[:space:]]*\*\//\1/<CR><TAB>
-map <C-T> :set noexpandtab!<CR>
-map <S-T> :set expandtab!<CR>
-map <CS-J> Jx
-map <ACS-C> :%s/\n\s*{/ {/<CR>
+map <C-2> :set tabstop=2 shiftwidth=2<CR>
+map <C-3> :set tabstop=4 shiftwidth=4<CR>
+map <C-4> :set tabstop=8 shiftwidth=8<CR>
 
+"map <F5> :! ctags -R .<CR>
+map <F6> :se number!<CR>
+" Enable below if NERD_commenter plugin is disabled..
+"map <C-C> :s/\(\S\)/#\1/<CR>
+"map <S-C> :s/#\(.\)/\1/<CR>
+"map <C-K> :s/\(.*\)/\/\*\1\*\//<CR>
+"map <S-K> :s/^[[:space:]]*\/\*\(.*\)[[:space:]]*\*\//\1/<CR><TAB>
+map <C-E> :set noexpandtab!<CR>
+map <S-E> :set expandtab!<CR>
+map <ACS-C> :%s/\n\s*{/ {/<CR>
+noremap tt :tab split<CR>
+noremap tc :tabc<CR>
+noremap sl :se number!<CR>
 

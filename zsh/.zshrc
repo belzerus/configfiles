@@ -57,7 +57,9 @@ zle -N up-line-or-beginning-search up-line-or-beginning-search
 zle -N down-line-or-beginning-search down-line-or-beginning-search
 bindkey -v
 bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[OA" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
 
 # Auto completion
 autoload -U compinit
@@ -72,11 +74,13 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:rm:*' ignore-line yes
 zstyle ':completion:*:*:kill*:*:processes' list-colors "=(#b) #([0-9]#)*=36=31"
 zstyle ':completion:*:*:kill*:*' menu yes select
+zstyle ':completion:*' special-dirs true
+unsetopt cdablevars
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=2000
+HISTSIZE=3000
+SAVEHIST=3000
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '$HOME/.zshrc'
@@ -88,6 +92,7 @@ compinit
 #alias
 alias ..='cd ..'
 alias ...='cd ...'
+alias .='source'
 
 #env var
 export EDITOR=vim
