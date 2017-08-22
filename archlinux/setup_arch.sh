@@ -4,7 +4,8 @@ HOSTNAME=$1
 HDD=$2
 PARTITIONING=$3
 
-test -z $HOSTNAME && echo "HOSTNAME as arg1 is required"; exit 2
+# fix below check
+test -z $HOSTNAME && echo "HOSTNAME as arg1 is required" && exit 2
 
 echo HOSTNAME=$HOSTNAME
 EFI=0
@@ -43,7 +44,7 @@ if [ -z $PARTITIONING ]; then
     echo "When done with the partions and fs creation and mounting, re-run the script with "1" as arg: './setup_arch 1'"
 fi
 
-pacstrap /mnt base,base-devel
+pacstrap /mnt {base,base-devel}
 genfstab -U /mnt >> /mnt/etc/fstab
 echo $HOSTNAME > /mnt/etc/hostname
 echo "127.0.1.1 $HOSTNAME.localdomain  $HOSTNAME" >> /mnt/etc/hosts
@@ -51,11 +52,12 @@ echo $HDD > /mnt/hdd.txt
 arch-chroot /mnt /bin/bash -c "ln -sf /usr/share/zoneinfo/Europe/Stockholm /etc/localtime ; \
     hwclock --systohc ; \
     locale-gen ; \
-    echo "LANG=en_US.UTF-8" >> /etc/locale.conf ; \
-    echo "Set root pwd"
-    passwd ; \
+    echo 'LANG=en_US.UTF-8' >> /etc/locale.conf ; \
+    echo 'Set root pwd'
+    echo 'root:changeme' | chpasswd ; \
     pacman -Sy grub ; \
     grub-install --target=i386-pc /dev/sda ; \
     grub-mkconfig -o /boot/grub/grub.cfg"
+umount -R /mnt
 echo "REBOOT SYSTEM"
 # reboot
