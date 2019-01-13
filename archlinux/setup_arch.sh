@@ -42,6 +42,7 @@ if [ -z $PARTITIONING ]; then
     echo "mount /dev/sda3 /mnt/..."
     echo "..."
     echo "When done with the partions and fs creation and mounting, re-run the script with "1" as arg: './setup_arch 1'"
+    exit 6
 fi
 
 pacstrap /mnt {base,base-devel}
