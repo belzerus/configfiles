@@ -74,4 +74,20 @@ map <ACS-C> :%s/\n\s*{/ {/<CR>
 noremap tt :tab split<CR>
 noremap tc :tabc<CR>
 noremap sl :se number!<CR>
+noremap hl :set hlsearch!<CR>
+"noremap tb :TagBarToggle<CR>
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
+nnoremap <leader>. :CtrlPTag<CR>
+nnoremap <leader>r :! ctags -R .<CR>
+
+set runtimepath^=~/git/vim-plugins/ctrlp.vim
+set runtimepath^=~/git/vim-plugins/nerdcommenter
+let g:NERDSpaceDelims = 1
+set runtimepath^=~/git/vim-plugins/tagbar
+set runtimepath^=~/git/vim-plugins/ctrlp-funky
+let g:ctrlp_funky_syntax_highlight = 1
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nnoremap ff :grep! "\<<cword>\>" . -r<CR>:copen<CR>
 
